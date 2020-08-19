@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "build":"electron-builder --win --x64"
   },
   "keywords": [],
   "author": "Xart3misX",
