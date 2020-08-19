@@ -1,0 +1,70 @@
+{
+  "name": "4anime-app",
+  "productName": "4anime-app",
+  "version": "1.0.0",
+  "description": "a simple desktop client for 4anime.to with a built-in ad blocker",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": "Xart3misX",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets\\logo.png"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "4anime_app"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@cliqz/adblocker-electron": "^1.17.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.52",
+    "@electron-forge/maker-deb": "^6.0.0-beta.52",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.52",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.52",
+    "@electron-forge/maker-zip": "^6.0.0-beta.52",
+    "electron": "9.2.0",
+    "electron-builder": "^22.8.0"
+  },
+  "build":{
+    "nsis":{
+      "include": "build/installer.nsh",
+      "createStartMenuShortcut": true
+    },
+    "appId":"Xart3misX#0615",
+    "win":{
+      "target":"nsis",
+      "icon":"build\\logo.ico"
+    }
+  }
+}
