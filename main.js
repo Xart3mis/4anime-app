@@ -11,9 +11,16 @@ let Downloaded = false;
 
 const download = (url, path, callback) => {
     request.head(url, (err, res, body) => {
-        request(url).pipe(fs.createWriteStream(path)).on('close', callback)
+        try{
+            request(url).pipe(fs.createWriteStream(path)).on('close', callback)
+        }
+        catch{
+            console.log('Internet Connection error')
+            ipcMain.emit('download-err')
+        }
     })
 }
+
 
 const ezListUrl = 'https://easylist-downloads.adblockplus.org/easylist.txt'
 const ezListPath = path.join(__dirname, 'assets/EasyList.txt')
@@ -30,14 +37,14 @@ setTimeout(downloadNoArgs, 1200)
 
 const createSplash= () => {
     mainSplash = new BrowserWindow({
-        width: 500,
-        height: 600,
+        width: 400,
+        height: 450,
         icon: path.join(__dirname, 'assets/logo.png'),
         resizable: false,
         autoHideMenuBar:true,
         center: true,
         alwaysOnTop:true,
-        frame:false
+        frame:false,
     });
 
     mainSplash.setMenu(null);
@@ -107,8 +114,7 @@ app.on('ready', () => {
     ipcMain.on('Downloaded', () => {
         mainSplash.close();
         mainWindow.show();
-        
-        })
+        });
     });
 
 
