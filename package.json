@@ -47,6 +47,7 @@
     "@cliqz/adblocker-electron": "^1.17.0",
     "@trodi/electron-splashscreen": "^1.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.3.4",
     "request": "^2.88.2",
     "update-electron-app": "^1.5.0"
   },

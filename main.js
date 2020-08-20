@@ -3,6 +3,7 @@ const path = require('path');
 const request = require('request')
 const fs = require('fs');
 const ElectronBlocker = require('@cliqz/adblocker-electron');
+const { autoUpdater } = require("electron-updater")
 
 let mainWindow;
 let mainSplash;
@@ -13,7 +14,6 @@ if (require('electron-squirrel-startup')) app.quit();
 
 require('update-electron-app')({
     repo: 'Xart3mis/4anime-app',
-    updateInterval: '1 hour'
 })//for autoUpdates
 
 
@@ -95,6 +95,13 @@ function createMenu(){
         {
             label: 'Toggle Full Screen',
             click: () => { fullscreen(); },
+        },
+
+        {
+            label:'Check For Updates',
+            click(){
+                autoUpdater.checkForUpdatesAndNotify('A new update is available');
+            }
         }
 
     ];
