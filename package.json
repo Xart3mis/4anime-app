@@ -1,7 +1,7 @@
 {
   "name": "4anime-app",
   "productName": "4anime-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a simple desktop client for 4anime.to with a built-in ad blocker",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "build": "electron-builder --win --x64"
+    "dist": "electron-builder --win --x64"
   },
   "keywords": [],
   "author": "Xart3misX",
