@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain} = require('electron');
+const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray} = require('electron');
 const path = require('path');
 const request = require('request')
 const fs = require('fs');
@@ -84,6 +84,8 @@ const createWindow = () => {
         globalShortcut.register('CommandOrControl+Q', () => { app.quit(); })
         globalShortcut.register('F11', () => { fullscreen(); })
         globalShortcut.register('CommandOrControl+H', () => { mainWindow.loadURL('https://4anime.to/') })
+        tray = new Tray(path.join(__dirname, 'assets/logo.png'))
+        tray.setToolTip('a simple desktop client for 4anime.to')
     })
 };
 

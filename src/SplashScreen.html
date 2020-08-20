@@ -4,11 +4,22 @@
     </head>
 
     <body style="background-color:#161616;">
-        <h2 class="mainText" id="main-text">
-            Downloading ad-block List
-        </h2>    
-        <div class="centered">
-            <div class="loader"></div>
+        <div class="unselectable">
+            <h2 class="mainText" id="main-text">
+                Downloading ad-block List
+            </h2>
+        
+            <div class="centered">
+                <div class="loader"></div>
+            </div>
+            <div class="bottom">
+                <h4 class="mainText" id="version">
+                    v...
+                </h4>
+            </div>
         </div>
     </body>
+    <script>
+        document.getElementById('version').innerHTML = 'v1.3.0'
+    </script>
 </html>

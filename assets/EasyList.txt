@@ -1,8 +1,8 @@
 [Adblock Plus 2.0]
-! Checksum: KCnNrY7krH1brPIQM9BDww
-! Version: 202008201431
+! Checksum: /ijSpXxjVfPAyXI/w1mJ/Q
+! Version: 202008201801
 ! Title: EasyList
-! Last modified: 20 Aug 2020 14:31 UTC
+! Last modified: 20 Aug 2020 18:01 UTC
 ! Expires: 1 days (update frequency)
 ! Homepage: https://easylist.to/
 ! Licence: https://easylist.to/pages/licence.html
@@ -38159,6 +38159,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||rtk.io^$third-party
 ||rtpdn10.com^$third-party
 ||rtpdn11.com^$third-party
+||rubiconproject.com^$third-party
 ||rumimorigu.info^$third-party
 ||rummyaffiliates.com^$third-party
 ||run-syndicate.com^$third-party
@@ -47018,6 +47019,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||cbbp1.com^$popup
 ||cbdzone.online^$popup
 ||cdaz.icu^$popup
+||cdn4ads.com^$popup
 ||cdnmedia.xyz^$popup
 ||ceeglagu.net^$popup
 ||cfts1tifqr.com^$popup
