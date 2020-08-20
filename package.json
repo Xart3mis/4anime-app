@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "build":"electron-builder --win --x64"
+    "build": "electron-builder --win --x64"
   },
   "keywords": [],
   "author": "Xart3misX",
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@cliqz/adblocker-electron": "^1.17.0",
+    "@trodi/electron-splashscreen": "^1.0.0",
     "request": "^2.88.2"
   },
   "devDependencies": {
@@ -56,15 +57,15 @@
     "electron": "9.2.0",
     "electron-builder": "^22.8.0"
   },
-  "build":{
-    "nsis":{
+  "build": {
+    "nsis": {
       "include": "build/installer.nsh",
       "createStartMenuShortcut": true
     },
-    "appId":"Xart3misX#0615",
-    "win":{
-      "target":"nsis",
-      "icon":"build\\logo.ico"
+    "appId": "Xart3misX#0615",
+    "win": {
+      "target": "nsis",
+      "icon": "build\\logo.ico"
     }
   }
 }

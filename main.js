@@ -1,38 +1,65 @@
-const { app, BrowserWindow, Menu, globalShortcut, session} = require('electron');
+const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain} = require('electron');
 const path = require('path');
 const request = require('request')
 const fs = require('fs');
 const ElectronBlocker = require('@cliqz/adblocker-electron');
 
+let mainWindow;
+let mainSplash;
+let Downloaded = false;
+
+
 const download = (url, path, callback) => {
     request.head(url, (err, res, body) => {
-        request(url)
-            .pipe(fs.createWriteStream(path))
-            .on('close', callback)
+        request(url).pipe(fs.createWriteStream(path)).on('close', callback)
     })
 }
 
 const ezListUrl = 'https://easylist-downloads.adblockplus.org/easylist.txt'
 const ezListPath = path.join(__dirname, 'assets/EasyList.txt')
 
+function downloadNoArgs(){
+    download(ezListUrl, ezListPath, () => {
+        console.log('Done!')
+        Downloaded = true;
+        ipcMain.emit('Downloaded')
+    });
+}
 
-download(ezListUrl, ezListPath, () => {
-    console.log('Done!')
-})
+setTimeout(downloadNoArgs, 1000)
+
+const createSplash= () => {
+    mainSplash = new BrowserWindow({
+        width: 500,
+        height: 600,
+        icon: path.join(__dirname, 'assets/logo.png'),
+        resizable: false,
+        autoHideMenuBar:true,
+        center: true,
+        alwaysOnTop:true,
+        frame:false
+    });
+
+    mainSplash.setMenu(null);
+
+    mainSplash.loadFile(path.join(__dirname, 'src/SplashScreen.html'))
+};
 
 const createWindow = () => {
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 960,
         height: 540,
         icon: path.join(__dirname, 'assets/logo.png'),
-        minWidth: 400,
-        minHeight: 200,
+        minWidth: 480,
+        minHeight: 270,
         autoHideMenuBar:true,
         resizable: true,
         center: true,
+        show:false
     });
     
-    
+    mainWindow.loadURL('https://4anime.to/');
+
     blocker = ElectronBlocker.ElectronBlocker.parse(fs.readFileSync(path.join(__dirname, 'assets/EasyList.txt'), 'utf-8'))
     blocker.enableBlockingInSession(session.defaultSession);
 
@@ -41,19 +68,14 @@ const createWindow = () => {
     app.whenReady().then(() => {
         globalShortcut.register('CommandOrControl+Q', () => { app.quit(); })
         globalShortcut.register('F11', () => { fullscreen(); })
-        globalShortcut.register('CommandOrControl+H', () => { createHome(); })
+        globalShortcut.register('CommandOrControl+H', () => { mainWindow.loadURL('https://4anime.to/') })
     })
 };
-
-function createHome(){
-    BrowserWindow.getFocusedWindow().close()
-    createWindow();
-}
 
 function createMenu(){
     const template = [{ label: 'Exit', click: async () => { app.quit(); } }, { label:'Home', click: () => {
         console.log('Home Clicked');
-        createHome();
+        mainWindow.loadURL('https://4anime.to/')
 } },
         {
             label: 'Toggle Full Screen',
@@ -78,9 +100,17 @@ function fullscreen() {
 }
 
 app.on('ready', () => {
+    createSplash();
     createWindow();
     createMenu();
-});
+
+    ipcMain.on('Downloaded', () => {
+        mainSplash.close();
+        mainWindow.show();
+        
+        })
+    });
+
 
 
 app.on('window-all-closed', () => {
