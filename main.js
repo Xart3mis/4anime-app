@@ -8,6 +8,14 @@ let mainWindow;
 let mainSplash;
 let Downloaded = false;
 
+if (require('electron-squirrel-startup')) app.quit();
+
+
+require('update-electron-app')({
+    repo: 'Xart3mis/4anime-app',
+    updateInterval: '1 hour'
+})//for autoUpdates
+
 
 const download = (url, path, callback) => {
     request.head(url, (err, res, body) => {
