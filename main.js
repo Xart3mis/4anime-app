@@ -26,7 +26,7 @@ function downloadNoArgs(){
     });
 }
 
-setTimeout(downloadNoArgs, 1000)
+setTimeout(downloadNoArgs, 1200)
 
 const createSplash= () => {
     mainSplash = new BrowserWindow({
