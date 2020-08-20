@@ -1,21 +1,15 @@
-const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray} = require('electron');
+const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray, dialog } = require('electron');
 const path = require('path');
 const request = require('request')
 const fs = require('fs');
 const ElectronBlocker = require('@cliqz/adblocker-electron');
-const { autoUpdater } = require("electron-updater")
+const updater = require('./src/Scripts/updater.js')
+
 
 let mainWindow;
 let mainSplash;
+let mainUpdate;
 let Downloaded = false;
-
-if (require('electron-squirrel-startup')) app.quit();
-
-
-require('update-electron-app')({
-    repo: 'Xart3mis/4anime-app',
-})//for autoUpdates
-
 
 const download = (url, path, callback) => {
     request.head(url, (err, res, body) => {
@@ -101,9 +95,7 @@ function createMenu(){
 
         {
             label:'Check For Updates',
-            click(){
-                autoUpdater.checkForUpdatesAndNotify('A new update is available');
-            }
+            click: () => {updater.checkForUpdates(Menu, BrowserWindow.getFocusedWindow(), ()=> {console.log('update')})}
         }
 
     ];
