@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray, dialog } = require('electron');
+const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray } = require('electron');
 const path = require('path');
 const request = require('request')
 const fs = require('fs');
@@ -8,8 +8,6 @@ const updater = require('./src/Scripts/updater.js')
 
 let mainWindow;
 let mainSplash;
-let mainUpdate;
-let Downloaded = false;
 
 const download = (url, path, callback) => {
     request.head(url, (err, res, body) => {
@@ -30,7 +28,6 @@ const ezListPath = path.join(__dirname, 'assets/EasyList.txt')
 function downloadNoArgs(){
     download(ezListUrl, ezListPath, () => {
         console.log('Done!')
-        Downloaded = true;
         ipcMain.emit('Downloaded')
     });
 }
@@ -47,12 +44,26 @@ const createSplash= () => {
         center: true,
         alwaysOnTop:true,
         frame:false,
+        webPreferences:{
+            preload: path.join(__dirname, 'src/SplashScreen.html'),
+            nodeIntegration:true
+        }
     });
-
+    //mainSplash.webContents.openDevTools()
+    
     mainSplash.setMenu(null);
+    
+    ipcMain.on('asynchronous-message', (event, arg) => {
+        console.log(arg)
+
+        // Event emitter for sending asynchronous messages
+        event.sender.send('version', app.getVersion())
+    })
 
     mainSplash.loadFile(path.join(__dirname, 'src/SplashScreen.html'))
 };
+
+
 
 const createWindow = () => {
     mainWindow = new BrowserWindow({

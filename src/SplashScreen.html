@@ -20,6 +20,14 @@
         </div>
     </body>
     <script>
-        document.getElementById('version').innerHTML = 'v1.3.2'
+        const { ipcRenderer } = require('electron')
+        
+        ipcRenderer.on('version', (event, arg) => {
+            console.log(arg)
+            document.getElementById('version').innerHTML = `v${arg}`
+        })
+
+                    // Async message sender
+        ipcRenderer.send('asynchronous-message', 'async ping')
     </script>
 </html>
