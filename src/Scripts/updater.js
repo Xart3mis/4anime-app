@@ -1,4 +1,4 @@
-const { dialog } = require('electron')
+const { app, dialog } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
 
@@ -42,7 +42,7 @@ autoUpdater.on('update-downloaded', () => {
         title: 'Install Updates',
         message: 'Updates downloaded, application will be quit for update...'
     }, () => {
-        setImmediate(() => autoUpdater.quitAndInstall())
+        setImmediate(() => {autoUpdater.quitAndInstall(); app.quit();})
     })
 })
 
