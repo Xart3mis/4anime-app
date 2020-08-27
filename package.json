@@ -46,6 +46,7 @@
   "dependencies": {
     "@cliqz/adblocker-electron": "^1.17.0",
     "@trodi/electron-splashscreen": "^1.0.0",
+    "discord-rich-presence": "0.0.8",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.4",
     "request": "^2.88.2",

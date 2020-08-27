@@ -1,9 +1,8 @@
-const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray } = require('electron');
+const { app, BrowserWindow, Menu, globalShortcut, session, ipcMain, Tray, dialog, nativeImage } = require('electron');
 const path = require('path');
 const request = require('request')
 const fs = require('fs');
 const ElectronBlocker = require('@cliqz/adblocker-electron');
-const updater = require('./src/Scripts/updater.js')
 
 
 let mainWindow;
@@ -32,7 +31,16 @@ function downloadNoArgs(){
     });
 }
 
-setTimeout(downloadNoArgs, 1200)
+/*
+function getUpdate(){
+    request('https://api.github.com/repos/Xart3mis/4anime-app/releases/latest', {json:true}, (err, res, body)=>{
+        if(err){console.log(err)};
+        console.log(body)
+    })
+}
+*/
+
+setTimeout(downloadNoArgs, 1400)
 
 const createSplash= () => {
     mainSplash = new BrowserWindow({
@@ -89,10 +97,43 @@ const createWindow = () => {
         globalShortcut.register('CommandOrControl+Q', () => { app.quit(); })
         globalShortcut.register('F11', () => { fullscreen(); })
         globalShortcut.register('CommandOrControl+H', () => { mainWindow.loadURL('https://4anime.to/') })
-        tray = new Tray(path.join(__dirname, 'assets/logo.png'))
+        tray = new Tray(path.join(__dirname, 'assets/logo.ico'))
         tray.setToolTip('a simple desktop client for 4anime.to')
+
+        image = nativeImage.createFromPath(path.join(__dirname, 'assets/logo.png'))
+        image.resize({
+            width:16,
+            height:16
+        });
+
+        let trayMenu = Menu.buildFromTemplate([
+            {label: '4anime'},
+            {type:'separator'},
+            {label:'Quit', click:()=>{app.quit()}},
+        ])
+
+        tray.setContextMenu(trayMenu)
     })
 };
+
+function updateDiscordRPC(){
+    const client = require('discord-rich-presence')('748654462121410740');
+    let nowWatching = mainWindow.webContents.getURL();
+
+    client.on('connected', () => {
+        console.log('connected!');
+    });
+
+    client.updatePresence({
+        state: 'Watchin Anime',
+        details: `watching ${nowWatching}`,
+        largeImageKey: 'logo',
+        instance: true,
+    });
+}
+
+setInterval(updateDiscordRPC, 15600);
+process.on('unhandledRejection', console.error);
 
 function createMenu(){
     const template = [{ label: 'Exit', click: async () => { app.quit(); } }, { label:'Home', click: () => {
@@ -106,7 +147,10 @@ function createMenu(){
 
         {
             label:'Check For Updates',
-            click: () => {updater.checkForUpdates(Menu, BrowserWindow.getFocusedWindow(), ()=> {console.log('update')})}
+            click: () => {console.log('chk4updates'); dialog.showMessageBox({
+                title:'Check For Updates',
+                message:'Updates is still a work in progress'
+            })}
         }
 
     ];
@@ -127,6 +171,7 @@ function fullscreen() {
 }
 
 app.on('ready', () => {
+    //getUpdate();
     createSplash();
     createWindow();
     createMenu();

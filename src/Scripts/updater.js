@@ -1,4 +1,4 @@
-const { app, dialog } = require('electron')
+const { app, dialog, shell } = require('electron')
 const { autoUpdater } = require('electron-updater')
 const path = require('path')
 
