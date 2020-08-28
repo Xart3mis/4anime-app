@@ -132,9 +132,6 @@ function updateDiscordRPC(){
     });
 }
 
-setInterval(updateDiscordRPC, 15600);
-process.on('unhandledRejection', console.error);
-
 function createMenu(){
     const template = [{ label: 'Exit', click: async () => { app.quit(); } }, { label:'Home', click: () => {
         console.log('Home Clicked');
@@ -175,6 +172,9 @@ app.on('ready', () => {
     createSplash();
     createWindow();
     createMenu();
+
+    setInterval(updateDiscordRPC, 15600);
+    process.on('unhandledRejection', console.error);
 
     ipcMain.on('Downloaded', () => {
         mainSplash.close();
