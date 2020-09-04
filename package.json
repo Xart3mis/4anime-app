@@ -48,6 +48,7 @@
     "@trodi/electron-splashscreen": "^1.0.0",
     "discord-rich-presence": "0.0.8",
     "electron-builder-squirrel-windows": "^22.8.1",
+    "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.3.4",
     "request": "^2.88.2",
     "update-electron-app": "^1.5.0"
