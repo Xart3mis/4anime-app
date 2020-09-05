@@ -4,8 +4,6 @@ const request = require('request')
 const fs = require('fs');
 const ElectronBlocker = require('@cliqz/adblocker-electron');
 
-const app = electron.app
-
 function handleSquirrelEvent(application) {
     if (process.argv.length === 1) {
         return false;
