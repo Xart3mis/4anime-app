@@ -169,6 +169,9 @@ const createWindow = () => {
 	mainWindow.loadURL("https://4anime.to/");
 
 	app.whenReady().then(() => {
+		globalShortcut.register("CommandOrControl+Shift+I", () => {
+			mainWindow.webContents.openDevTools();
+		});
 		globalShortcut.register("CommandOrControl+Q", () => {
 			app.quit();
 		});
