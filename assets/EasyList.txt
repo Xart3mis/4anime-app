@@ -1,8 +1,8 @@
 [Adblock Plus 2.0]
-! Checksum: HgRla116yAvNZ1rVmNkZbA
-! Version: 202009051331
+! Checksum: sAy/Nc1Wy2QNq0czeDfxhw
+! Version: 202009060031
 ! Title: EasyList
-! Last modified: 05 Sep 2020 13:30 UTC
+! Last modified: 06 Sep 2020 00:31 UTC
 ! Expires: 1 days (update frequency)
 ! Homepage: https://easylist.to/
 ! Licence: https://easylist.to/pages/licence.html
@@ -16882,6 +16882,7 @@ _popunder+$popup
 ###stickyrightad
 ###stopAdv
 ###stopAdvt
+###stories-ad
 ###story-90-728-area
 ###story-ad
 ###story-ad-1-wrapper
@@ -21446,6 +21447,7 @@ _popunder+$popup
 ##.adsense3
 ##.adsense300
 ##.adsense300_top
+##.adsense300x250
 ##.adsense728
 ##.adsense728x90
 ##.adsenseAds
@@ -24827,6 +24829,7 @@ _popunder+$popup
 ##.googleAds_article_page_above_comments
 ##.googleAdsense
 ##.googleAdsense468x60
+##.googleAdv
 ##.googleAdv1
 ##.googleBannerWrapper
 ##.googleContentAds
@@ -30437,6 +30440,7 @@ _popunder+$popup
 ##.td-zergnet
 ##.widget-ami-zergnet
 ##.widget_ok_zergnet_widget
+##.zerg-widgets
 ##.zergmod
 ##.zergnet
 ##.zergnet-holder
@@ -31777,6 +31781,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||cbpsdvozwsbf.com^
 ||cconseent.info^
 ||cdcz.xyz^
+||cdn.jamcdn.pro^
 ||cdn4ads.com^
 ||cdnads.com^
 ||cdnmr.net^
@@ -31804,6 +31809,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||characteristicsumptuousmister.com^
 ||charactice.club^
 ||charalli.pro^
+||chardsreme.space^
 ||check-now.online^
 ||cheewait.net^
 ||chemicall.club^
@@ -32045,6 +32051,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||dinneredaq.club^
 ||dioneperson.pro^
 ||diplomaticlastingpert.com^
+||dirritorexa.club^
 ||disappenedy.site^
 ||discountryvc.club^
 ||discoverapp.xyz^
@@ -33038,6 +33045,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||mpay69.com^
 ||mpletedsen.fun^
 ||mplexanno.club^
+||mplexhete.club^
 ||mpliedancia.info^
 ||mpltrack.com^
 ||mprisedluxemb.info^
@@ -33657,6 +33665,7 @@ coingamez.com,mangaumaru.com,milfzr.com,pencurimovie.cc#@#div[id^="div-gpt-ad"]
 ||rightiescolled.club^
 ||rightstaredstun.com^
 ||rinedcountilconsiden.info^
+||ringassum.club^
 ||rintellsfundrew.info^
 ||riodovernprovi.club^
 ||ripslifestassoci.info^
@@ -52509,7 +52518,6 @@ javascript:$popup,domain=pirateproxy.live|proxyfrom.asia|superproxy.biz|thehidde
 @@||netdna-cdn.com/wp-content/$script,third-party,domain=100percentfedup.com|allthingsvegas.com|americasfreedomfighters.com|dailyheadlines.net|foreverymom.com|newser.com|shark-tank.com|tosavealife.com|videogamesblogger.com
 @@||netdna-cdn.com/wp-includes/js/$script,third-party,domain=100percentfedup.com|allthingsvegas.com|americasfreedomfighters.com|dailyheadlines.net|foreverymom.com|newser.com|shark-tank.com|thehayride.com|tosavealife.com|videogamesblogger.com
 @@||outstreamplayer.com^$domain=grammarist.com
-@@||p.jwpcdn.com/player/v/$script,stylesheet,third-party
 @@||platform.instagram.com^$script,third-party,domain=100percentfedup.com|allthingsvegas.com|dailyheadlines.net|foreverymom.com|newser.com|rightwingnews.com|shark-tank.com|tosavealife.com|videogamesblogger.com
 @@||platform.twitter.com^$image,domain=allthingsvegas.com|newser.com|whatfinger.com
 @@||playbuzz.com/widget/$script,third-party
@@ -55621,6 +55629,7 @@ behealthydaily.com###partners_content
 gumtree.com###partnership-vip-compact
 gumtree.com###partnerships
 patheos.com###patheos-ad-region
+mashable.com###pathing-banner
 carscoops.com###payload
 binaries4all.com###payserver
 binaries4all.com###payserver2
