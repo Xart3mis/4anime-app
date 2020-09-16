@@ -8,6 +8,8 @@ const {
 	Tray,
 	dialog,
 	nativeImage,
+	clipboard,
+	shell,
 } = require("electron");
 const path = require("path");
 const request = require("request");
@@ -209,7 +211,6 @@ const createWindow = () => {
 
 function updateDiscordRPC() {
 	const client = require("discord-rich-presence")("748654462121410740");
-	let nowWatching = mainWindow.webContents.getURL();
 
 	client.on("connected", () => {
 		console.log("connected!");
@@ -217,10 +218,15 @@ function updateDiscordRPC() {
 
 	client.updatePresence({
 		state: "Watchin Anime",
-		details: `watching ${nowWatching}`,
+		details: `watching ${getCurrentUrl}`,
 		largeImageKey: "logo",
 		instance: true,
+		elapsedTime: new Date(),
 	});
+}
+
+function getCurrentUrl() {
+	return mainWindow.webContents.getURL();
 }
 
 function createMenu() {
@@ -236,6 +242,18 @@ function createMenu() {
 			click: () => {
 				console.log("Home Clicked");
 				mainWindow.loadURL("https://4anime.to/");
+			},
+		},
+		{
+			label: "Copy link",
+			click: () => {
+				clipboard.writeText(getCurrentUrl());
+			},
+		},
+		{
+			label: "Open In Browser",
+			click: () => {
+				shell.openExternal(getCurrentUrl());
 			},
 		},
 		{
