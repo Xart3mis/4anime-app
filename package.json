@@ -2,7 +2,7 @@
 	"name": "4anime_app",
 	"productName": "4anime client",
 	"repository": "https://github.com/Xart3mis/4anime-app",
-	"version": "1.4.1",
+	"version": "1.4.2",
 	"description": "a simple desktop client for 4anime.to with a built-in ad blocker",
 	"main": "main.js",
 	"scripts": {
@@ -10,7 +10,8 @@
 		"package": "electron-forge package",
 		"make": "electron-forge make",
 		"publish": "electron-builder --win -p always",
-		"dist": "electron-builder --win --x64"
+		"dist": "electron-builder --win --x64",
+		"test": "node tests.js"
 	},
 	"keywords": [],
 	"author": "Xart3misX",
@@ -48,7 +49,7 @@
 		"@cliqz/adblocker-electron": "^1.17.0",
 		"@trodi/electron-splashscreen": "^1.0.0",
 		"child_process": "^1.0.2",
-		"discord-rich-presence": "0.0.8",
+		"discord-rpc": "^3.1.4",
 		"electron-builder-squirrel-windows": "^22.8.1",
 		"electron-squirrel-startup": "^1.0.0",
 		"electron-updater": "^4.3.4",
