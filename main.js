@@ -158,7 +158,7 @@ const createWindow = () => {
 		icon: path.join(__dirname, "assets/logo.png"),
 		minWidth: 480,
 		minHeight: 270,
-		autoHideMenuBar: true,
+		autoHideMenuBar: false,
 		resizable: true,
 		center: true,
 		show: false,
@@ -174,7 +174,6 @@ const createWindow = () => {
 	blocker.enableBlockingInSession(session.defaultSession);
 
 	mainWindow.loadURL("https://4anime.to/");
-	require("./src/Scripts/rpc")(contents.getURL());
 	console.log(contents.getURL());
 	app.whenReady().then(() => {
 		globalShortcut.register("CommandOrControl+Shift+I", () => {
@@ -222,6 +221,10 @@ const createWindow = () => {
 
 function getCurrentUrl() {
 	return contents.getURL();
+}
+
+function disableMenu() {
+	Menu.setApplicationMenu(null);
 }
 
 function createMenu() {
@@ -288,11 +291,11 @@ function fullscreen() {
 }
 
 app.on("ready", () => {
+	require("./src/Scripts/rpc")();
 	//getUpdate();
 	createSplash();
 	createWindow();
 	createMenu();
-
 	mainWindow.webContents.on("new-window", (event, url) => {
 		var hostname = new URL(url).hostname.toLowerCase();
 		if (hostname.indexOf("discord.gg") !== -1) {
@@ -317,6 +320,13 @@ app.on("ready", () => {
 			mainWindow.show();
 		}, 5000);
 	});
+
+	mainWindow.on("enter-full-screen", () => {
+		disableMenu();
+	});
+	mainWindow.on("leave-full-screen", () => {
+		createMenu();
+	});
 });
 
 app.on("window-all-closed", () => {
@@ -329,4 +339,8 @@ app.on("activate", () => {
 	if (BrowserWindow.getAllWindows().length === 0) {
 		createWindow();
 	}
+});
+
+app.on("enter-full-screen", () => {
+	disableMenu();
 });
