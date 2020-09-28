@@ -15,7 +15,6 @@ const path = require("path");
 const request = require("request");
 const fs = require("fs");
 const ElectronBlocker = require("@cliqz/adblocker-electron");
-
 require("update-electron-app")();
 
 function handleSquirrelEvent(application) {
@@ -88,6 +87,7 @@ if (handleSquirrelEvent(app)) {
 
 let mainWindow;
 let mainSplash;
+let contents;
 
 const download = (url, path, callback) => {
 	request.head(url, (err, res, body) => {
@@ -119,7 +119,7 @@ function getUpdate(){
 }
 */
 
-setTimeout(downloadNoArgs, 1400);
+setTimeout(downloadNoArgs, 2000);
 
 const createSplash = () => {
 	mainSplash = new BrowserWindow({
@@ -127,8 +127,9 @@ const createSplash = () => {
 		height: 450,
 		icon: path.join(__dirname, "assets/logo.png"),
 		resizable: false,
+		movable: true,
 		autoHideMenuBar: true,
-		center: true,
+		opacity: 0.98,
 		alwaysOnTop: true,
 		frame: false,
 		webPreferences: {
@@ -163,6 +164,8 @@ const createWindow = () => {
 		show: false,
 	});
 
+	contents = mainWindow.webContents;
+
 	mainWindow.loadURL("https://4anime.to/");
 
 	blocker = ElectronBlocker.ElectronBlocker.parse(
@@ -171,7 +174,8 @@ const createWindow = () => {
 	blocker.enableBlockingInSession(session.defaultSession);
 
 	mainWindow.loadURL("https://4anime.to/");
-
+	require("./src/Scripts/rpc")(contents.getURL());
+	console.log(contents.getURL());
 	app.whenReady().then(() => {
 		globalShortcut.register("CommandOrControl+Shift+I", () => {
 			mainWindow.webContents.openDevTools();
@@ -185,6 +189,13 @@ const createWindow = () => {
 		globalShortcut.register("CommandOrControl+H", () => {
 			mainWindow.loadURL("https://4anime.to/");
 		});
+		globalShortcut.register("CommandOrControl+R", () => {
+			mainWindow.reload();
+		});
+		globalShortcut.register("F5", () => {
+			mainWindow.reload();
+		});
+
 		tray = new Tray(path.join(__dirname, "assets/logo.ico"));
 		tray.setToolTip("a simple desktop client for 4anime.to");
 
@@ -209,24 +220,8 @@ const createWindow = () => {
 	});
 };
 
-function updateDiscordRPC() {
-	const client = require("discord-rich-presence")("748654462121410740");
-
-	client.on("connected", () => {
-		console.log("connected!");
-	});
-
-	client.updatePresence({
-		state: "Watchin Anime",
-		details: `watching ${getCurrentUrl}`,
-		largeImageKey: "logo",
-		instance: true,
-		elapsedTime: new Date(),
-	});
-}
-
 function getCurrentUrl() {
-	return mainWindow.webContents.getURL();
+	return contents.getURL();
 }
 
 function createMenu() {
@@ -257,20 +252,24 @@ function createMenu() {
 			},
 		},
 		{
+			label: "Refresh",
+			click: () => {
+				mainWindow.reload();
+			},
+		},
+		{
 			label: "Toggle Full Screen",
 			click: () => {
 				fullscreen();
 			},
 		},
-
 		{
 			label: "Check For Updates",
 			click: () => {
 				console.log("chk4updates");
-				dialog.showMessageBox({
-					title: "Check For Updates",
-					message: "Updates is still a work in progress",
-				});
+				shell.openExternal(
+					"https://github.com/Xart3mis/4anime-app/releases/latest"
+				);
 			},
 		},
 	];
@@ -294,12 +293,29 @@ app.on("ready", () => {
 	createWindow();
 	createMenu();
 
-	setInterval(updateDiscordRPC, 15600);
-	process.on("unhandledRejection", console.error);
+	mainWindow.webContents.on("new-window", (event, url) => {
+		var hostname = new URL(url).hostname.toLowerCase();
+		if (hostname.indexOf("discord.gg") !== -1) {
+			shell.openExternal("https://" + "discord.gg" + "/" + "Yfb6JVe");
+		}
+		if (hostname.indexOf("disqus.com") !== -1) {
+			dialog.showMessageBox(mainWindow, {
+				type: "info",
+				title: "disqus",
+				message:
+					"disqus logins are not supported, please open it in browser if you would like to comment",
+			});
+			event.preventDefault();
+		} else {
+			event.preventDefault();
+		}
+	});
 
 	ipcMain.on("Downloaded", () => {
 		mainSplash.close();
-		mainWindow.show();
+		setTimeout(() => {
+			mainWindow.show();
+		}, 5000);
 	});
 });
 
