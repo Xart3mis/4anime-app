@@ -1,25 +1,12 @@
-/*
-const client = require("discord-rich-presence")("748654462121410740");
+function infiniteLoadFix(link){
+	let goodCode = 42489
+	let badId = link.split('?')[1].split('=')[1];
+	let mainUrl = link.split('=')[0]+'='
+	console.log(badId);
+	console.log(mainUrl)
+	if(badId!=goodCode){
+		return mainUrl+'4289'
+	}
+}
 
-client.on("connected", () => {
-	console.log("connected!");
-
-	client.updatePresence({
-		state: "watchin anime",
-		details: "watching https://4anime.to/bla-bla-bla",
-		startTimestamp: new Date(),
-		largeImageKey: "logo",
-		smallImageKey: "logo",
-	});
-});
-
-process.on("unhandledRejection", console.error);
-*/
-
-const setActivity = require("./src/Scripts/rpc");
-
-setActivity("https://4anime.to/BLA");
-
-setInterval(() => {
-	setActivity("https://4anime.to/BLA");
-}, 16000);
+console.log(infiniteLoadFix('https://4anime.to/kyoukai-no-kanata-episode-01?id=21846'))

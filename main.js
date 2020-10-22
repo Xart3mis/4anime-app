@@ -290,12 +290,24 @@ function fullscreen() {
 	}
 }
 
+function infiniteLoadFix(link){
+	let goodCode = 42489
+	let badId = link.split('?')[1].split('=')[1];
+	let mainUrl = link.split('=')[0]+'='
+	/*console.log(badId);
+	console.log(mainUrl)*/
+	if(badId!=goodCode){
+		return mainUrl+'4289'
+	}
+}
+
 app.on("ready", () => {
 	require("./src/Scripts/rpc")();
 	//getUpdate();
 	createSplash();
 	createWindow();
 	createMenu();
+
 	mainWindow.webContents.on("new-window", (event, url) => {
 		var hostname = new URL(url).hostname.toLowerCase();
 		if (hostname.indexOf("discord.gg") !== -1) {
