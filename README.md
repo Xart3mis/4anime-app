@@ -28,4 +28,4 @@ Download the latest release from [here](https://github.com/Xart3mis/4anime-app/r
 ## Support
 
 If u encounter any problems/bugs you are welcome to post an issue [here](https://github.com/Xart3mis/4anime-app/issues)
-and if u would like to contact me directly feel free to message me on discord _@_`depresso#8424`
+and if u would like to contact me directly feel free to message me on discord _@_`Xart3misX#8424`
